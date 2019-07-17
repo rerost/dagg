@@ -8,16 +8,19 @@ spec:
   - name: {{index .Option "team"}}-{{.Name}}-dag
     dag:
       tasks:
-      {{range .Jobs -}}
+      {{- range .Jobs}}
       - name: {{.Name}}
         template: template-{{.Name}}
-        dependencies: [{{range $index, $var := .Dependencies -}}{{if ne $index 0}}, {{end}}{{$var}}{{end}}]
-      {{end -}}
+        {{- $deplen := len .Dependencies}}
+        {{- if ne 0 $deplen}}
+        dependencies: [{{- range $index, $var := .Dependencies}}{{- if ne $index 0}}, {{- end}}{{$var}}{{- end}}]
+        {{- end}}
+      {{- end}}
 
-  {{range .Jobs -}}
+  {{- range .Jobs}}
   - name: template-{{.Name}}
     container:
       image: rerost/{{index .Option "repo"}}:latest
       command: ["{{.Command}}"]
-  {{end -}}
+  {{- end}}
 
