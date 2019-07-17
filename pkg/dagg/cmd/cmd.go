@@ -31,7 +31,7 @@ func NewDefaultDaggCommand(wd clib.Path, build clib.Build) *cobra.Command {
 func NewDaggCommand(ctx *dagg.Ctx) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   ctx.Build.AppName,
-		Short: "Dag generate tool",
+		Short: "DAG tool",
 		PersistentPreRunE: func(c *cobra.Command, args []string) error {
 			if err := ctx.Init(); err != nil {
 				return errors.WithStack(err)
@@ -46,7 +46,7 @@ func NewDaggCommand(ctx *dagg.Ctx) *cobra.Command {
 		clib.NewVersionCommand(ctx.IO, ctx.Build),
 		&cobra.Command{
 			Use:   "gen",
-			Short: "Generate dag by template",
+			Short: "Generate DAG instance by template from DAG file",
 			Args:  cobra.ExactArgs(2),
 			RunE: func(_ *cobra.Command, args []string) error {
 				dagFile, err := ioutil.ReadFile(args[0])
