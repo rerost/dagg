@@ -18,22 +18,22 @@ jobs:
   - name: jobA
     command: "echo A"
     option:
-      repository: repo
+      repo: repo
   - name: jobB
     command: "echo B"
     dependencies: [jobA]
     option:
-      repository: repo
+      repo: repo
   - name: jobC
     command: "echo C"
     dependencies: [jobB]
     option:
-      repository: repo
+      repo: repo
   - name: jobD
     command: "echo D"
     dependencies: [jobB, jobC]
     option:
-      repository: repo
+      repo: repo
 ```
 
 sample-template.tpl
@@ -48,17 +48,21 @@ spec:
   - name: {{index .Option "team"}}-{{.Name}}-dag
     dag:
       tasks:
-      {{range .Jobs -}}
+      {{- range .Jobs}}
       - name: {{.Name}}
         template: template-{{.Name}}
-      {{end -}}
+        {{- $deplen := len .Dependencies}}
+        {{- if ne 0 $deplen}}
+        dependencies: [{{- range $index, $var := .Dependencies}}{{- if ne $index 0}}, {{- end}}{{$var}}{{- end}}]
+        {{- end}}
+      {{- end}}
 
-  {{range .Jobs -}}
+  {{- range .Jobs}}
   - name: template-{{.Name}}
     container:
-      image: rerost/{{index .Option "repo"}}
+      image: rerost/{{index .Option "repo"}}:latest
       command: ["{{.Command}}"]
-  {{end -}}
+  {{- end}}
 ```
 
 ```bash
@@ -77,25 +81,28 @@ spec:
         template: template-jobA
       - name: jobB
         template: template-jobB
+        dependencies: [jobA]
       - name: jobC
         template: template-jobC
+        dependencies: [jobB]
       - name: jobD
         template: template-jobD
-      - name: template-jobA
+        dependencies: [jobB,jobC]
+  - name: template-jobA
     container:
-      image: rerost/
+      image: rerost/repo:latest
       command: ["echo A"]
   - name: template-jobB
     container:
-      image: rerost/
+      image: rerost/repo:latest
       command: ["echo B"]
   - name: template-jobC
     container:
-      image: rerost/
+      image: rerost/repo:latest
       command: ["echo C"]
   - name: template-jobD
     container:
-      image: rerost/
+      image: rerost/repo:latest
       command: ["echo D"]
 ```
 
