@@ -5,19 +5,19 @@ jobs:
   - name: jobA
     command: "echo A"
     option:
-      repository: repo
+      repo: repo
   - name: jobB
     command: "echo B"
     dependencies: [jobA]
     option:
-      repository: repo
+      repo: repo
   - name: jobC
     command: "echo C"
     dependencies: [jobB]
     option:
-      repository: repo
+      repo: repo
   - name: jobD
     command: "echo D"
     dependencies: [jobB, jobC]
     option:
-      repository: repo
+      repo: repo

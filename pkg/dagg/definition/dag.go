@@ -1,9 +1,10 @@
 package definition
 
 type Job struct {
-	Name    string            `yaml:"name"`
-	Command string            `yaml:"command"`
-	Option  map[string]string `yaml:"option,omitempty"`
+	Name         string            `yaml:"name"`
+	Command      string            `yaml:"command"`
+	Option       map[string]string `yaml:"option,omitempty"`
+	Dependencies []string          `yaml:"dependencies"`
 }
 
 type Dag struct {
