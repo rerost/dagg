@@ -12,24 +12,27 @@ spec:
         template: template-jobA
       - name: jobB
         template: template-jobB
+        dependencies: [jobA]
       - name: jobC
         template: template-jobC
+        dependencies: [jobB]
       - name: jobD
         template: template-jobD
-      - name: template-jobA
+        dependencies: [jobB,jobC]
+  - name: template-jobA
     container:
-      image: rerost/
+      image: rerost/repo:latest
       command: ["echo A"]
   - name: template-jobB
     container:
-      image: rerost/
+      image: rerost/repo:latest
       command: ["echo B"]
   - name: template-jobC
     container:
-      image: rerost/
+      image: rerost/repo:latest
       command: ["echo C"]
   - name: template-jobD
     container:
-      image: rerost/
+      image: rerost/repo:latest
       command: ["echo D"]
-  
+
