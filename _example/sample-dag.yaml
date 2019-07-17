@@ -1,0 +1,23 @@
+name: sample
+option:
+  team: rerost
+jobs:
+  - name: jobA
+    command: "echo A"
+    option:
+      repository: repo
+  - name: jobB
+    command: "echo B"
+    dependencies: [jobA]
+    option:
+      repository: repo
+  - name: jobC
+    command: "echo C"
+    dependencies: [jobB]
+    option:
+      repository: repo
+  - name: jobD
+    command: "echo D"
+    dependencies: [jobB, jobC]
+    option:
+      repository: repo
