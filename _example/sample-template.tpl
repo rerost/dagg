@@ -11,12 +11,13 @@ spec:
       {{range .Jobs -}}
       - name: {{.Name}}
         template: template-{{.Name}}
+        dependencies: [{{range $index, $var := .Dependencies -}}{{if ne $index 0}}, {{end}}{{$var}}{{end}}]
       {{end -}}
 
   {{range .Jobs -}}
   - name: template-{{.Name}}
     container:
-      image: rerost/{{index .Option "repo"}}
+      image: rerost/{{index .Option "repo"}}:latest
       command: ["{{.Command}}"]
   {{end -}}
 
