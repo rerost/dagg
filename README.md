@@ -96,3 +96,13 @@ spec:
       image: rerost/
       command: ["echo D"]
 ```
+
+## Commands
+- [x] `dagg gen`
+  - Generate DAG instance by template from DAG file
+  - e.g.) DAG file -> Argo manifest
+- [ ] `dagg draw`
+  - Draw DAG
+- [ ] `dagg reverse`
+  - Reverse DAG instance to DAG file
+  - e.g.) Argo manifest -> DAG file
