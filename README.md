@@ -1,6 +1,8 @@
 # Dagg 
 For dag expression tool
 
+![Screenshot from 2019-07-17 23-00-05](https://user-images.githubusercontent.com/5201588/61381933-c6a29900-a8e6-11e9-968f-105215d714e8.png)
+
 ## Install
 ```
 go get github.com/rerost/dagg/cmd/dagg
