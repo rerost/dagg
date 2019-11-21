@@ -61,10 +61,6 @@ packages: $(PACKAGES)
 
 .PHONY: setup
 setup:
-ifdef CI
-	curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-endif
-	dep ensure -v -vendor-only
 	@go get github.com/izumin5210/gex/cmd/gex
 	gex --build --verbose
 
