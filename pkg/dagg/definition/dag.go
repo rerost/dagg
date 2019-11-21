@@ -2,7 +2,7 @@ package definition
 
 type Job struct {
 	Name         string            `yaml:"name"`
-	Command      string            `yaml:"command"`
+	Commands     []string          `yaml:"commands"`
 	Option       map[string]string `yaml:"option,omitempty"`
 	Dependencies []string          `yaml:"dependencies"`
 }
