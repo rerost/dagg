@@ -5,7 +5,7 @@ For dag expression tool
 
 ## Install
 ```
-go get github.com/rerost/dagg/cmd/dagg
+go install github.com/rerost/dagg/cmd/dagg@latest
 ```
 
 ## Example
