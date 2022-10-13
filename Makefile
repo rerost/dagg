@@ -75,9 +75,9 @@ gen:
 .PHONY: lint
 lint:
 ifdef CI
-        gex reviewdog -reporter=github-pr-review
+	gex reviewdog -reporter=github-pr-review
 else
-        gex reviewdog -diff="git diff master"
+	gex reviewdog -diff="git diff master"
 endif
 
 .PHONY: test
